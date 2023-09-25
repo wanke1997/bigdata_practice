@@ -22,3 +22,10 @@ get all container's ip address:
 ```bash
 docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';
 ```
+
+launch an example spark job
+```bash
+# Please submit this command with client container
+cd /opt/apps
+spark-submit --master spark://spark-master:7077 spark_script.py
+```

@@ -1,0 +1,14 @@
+---
+version: '3.8'
+services:
+  client-container:
+    container_name: client-container
+    build: .
+    volumes:
+      - ../../apps:/opt/apps
+      - ../../data:/opt/data
+    command: tail -F anything
+networks:
+  default:
+    name: cluster_network
+    external: true
