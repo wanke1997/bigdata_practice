@@ -12,3 +12,13 @@ Cluster 3: Kafka, Hadoop(Slave, HDFS), Spark(Worker), HBase(Worker)
 Cluster 1: Kafka, Hadoop(Master, HDFS, MapReduce), Storm(Master) \
 Cluster 2: Kafka, Hadoop(Slave, HDFS, MapReduce), Storm(Slave), MySQL \
 Cluster 3: Kafka, Hadoop(Slave, HDFS, MapReduce), Storm(Slave)
+
+build empty container's image:
+```bash
+docker build -t client-container .
+```
+
+get all container's ip address: 
+```bash
+docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';
+```
