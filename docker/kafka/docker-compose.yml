@@ -39,7 +39,6 @@ services:
       KAFKA_BROKER_ID: 1
       BOOTSTRAP_SERVERS: kafka1:9091,kafka2:9092,kafka3:9093
       ZOOKEEPER: zookeeper:2181
-    # - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
     networks:
       - proxynet  
   
@@ -59,7 +58,6 @@ services:
       KAFKA_BROKER_ID: 2
       BOOTSTRAP_SERVERS: kafka1:9091,kafka2:9092,kafka3:9093
       ZOOKEEPER: zookeeper:2181
-    # - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
     networks:
       - proxynet
 
@@ -79,19 +77,19 @@ services:
       KAFKA_BROKER_ID: 3
       BOOTSTRAP_SERVERS: kafka1:9091,kafka2:9092,kafka3:9093
       ZOOKEEPER: zookeeper:2181
-    # - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
     networks:
       - proxynet
 
   client-container:
     container_name: client-container
-    image: client-container:latest
+    build: .
     volumes:
       - ../../apps:/opt/apps
       - ../../data:/opt/data
     command: tail -F anything
     networks:
       - proxynet
+
 networks:
   proxynet:
     name: cluster_network
