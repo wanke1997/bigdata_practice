@@ -58,6 +58,23 @@ HDFS: http://localhost:9870 \
 Resource Manager(MapReduce tasks): http://localhost:8089/ \
 HBase: http://localhost:16010/
 
+## Start containers
+1. Start Zookeeper and Kafka
+```bash
+cd <dir_to_project>/docker/zookeeper_kafka
+docker-compose up -d
+```
+2. Start Hadoop
+```bash
+cd <dir_to_project>/docker/zookeeper_kafka
+docker build -t hadoop-base:3.3.1 -f Dockerfile .
+docker-compose up -d
+```
+3. Start HBase. Note that the prerequisite of starting HBase is that Zookeeper and Hadoop are running
+4. Start MySQL
+5. Start Spark cluster
+6. Start client container
+
 ### Potential Problems and Solutions
 1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
 Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
