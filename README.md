@@ -102,8 +102,23 @@ docker-compose up -d
 cd <dir_to_project>/docker/client
 docker-compose up -d
 ```
+## MySQL Login
+Default variable settings are shown below
+| Name | Value |
+|------|------|
+| MYSQL_HOST | mysql |
+| MYSQL_VERSION | 8.0.21 |
+| MYSQL_DATABASE | test |
+| MYSQL_ROOT_USER | root |
+| MYSQL_ROOT_PASSWORD | root |
+| MYSQL_USER | dev |
+| MYSQL_PASSWORD | dev |
+```bash
+# command to start mysql, the password can be found in the table above
+mysql -u root -p
+```
 
-### Potential Problems and Solutions
+## Potential Problems and Solutions
 1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
 Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
 ```bash
