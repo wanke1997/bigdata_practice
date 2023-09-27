@@ -23,9 +23,9 @@ get all container's ip address:
 docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';
 ```
 
-### About Spark
+## About Spark
 
-launch an example spark job
+You can launch an example spark job on the client container by following the commands below. 
 ```bash
 # Please run this command on client container
 cd /opt/apps
