@@ -55,7 +55,8 @@ Then we can check the outputs in HDFS /output directory. If /output directory ex
 
 5. Check cluster web pages:
 HDFS: http://localhost:9870 \
-Resource Manager(MapReduce tasks): http://localhost:8089/
+Resource Manager(MapReduce tasks): http://localhost:8089/ \
+HBase: http://localhost:16010/
 
 ### Potential Problems and Solutions
 1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
