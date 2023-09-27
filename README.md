@@ -64,3 +64,6 @@ Solution: uncommment the last second command in namenode/run.sh file to format t
 ```bash
 cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
 ```
+
+## Notes:
+所有的开发都在client里面完成，使用python脚本和插件，remote访问所有的服务（hadoop,mysql,spark,kafka,etc）
