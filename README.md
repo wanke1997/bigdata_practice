@@ -54,11 +54,11 @@ hadoop jar WordCount.jar WordCount /input /output
 Then we can check the outputs in HDFS /output directory. If /output directory exists, we should delete it in advance. 
 
 5. Check cluster web pages:
-HDFS: http://localhost:9870
+HDFS: http://localhost:9870 \
 Resource Manager(MapReduce tasks): http://localhost:8089/
 
 ### Potential Problems and Solutions
-1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted
+1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
 Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
 ```bash
 cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
