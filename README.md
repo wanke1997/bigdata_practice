@@ -114,7 +114,7 @@ Default variable settings are shown below
 | MYSQL_USER | dev |
 | MYSQL_PASSWORD | dev |
 ```bash
-# command to start mysql, the password can be found in the table above
+# command to start mysql from mysql container, the password can be found from the table above
 mysql -u root -p
 ```
 
