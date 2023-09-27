@@ -9,9 +9,9 @@ Cluster 2: Kafka, Hadoop(Slave, HDFS), Spark(Worker), HBase(Worker), MySQL \
 Cluster 3: Kafka, Hadoop(Slave, HDFS), Spark(Worker), HBase(Worker)
 
 ### 1.2. Version 2
-Cluster 1: Kafka, Hadoop(Master, HDFS, MapReduce), Storm(Master) \
-Cluster 2: Kafka, Hadoop(Slave, HDFS, MapReduce), Storm(Slave), MySQL \
-Cluster 3: Kafka, Hadoop(Slave, HDFS, MapReduce), Storm(Slave)
+Cluster 1: Kafka, Hadoop(Master, HDFS, MapReduce) \
+Cluster 2: Kafka, Hadoop(Slave, HDFS, MapReduce) MySQL \
+Cluster 3: Kafka, Hadoop(Slave, HDFS, MapReduce)
 
 build empty container's image:
 ```bash
