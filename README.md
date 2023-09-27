@@ -29,3 +29,33 @@ launch an example spark job
 cd /opt/apps
 spark-submit --master spark://spark-master:7077 spark_script.py
 ```
+
+### About hadoop
+1. Create a directory
+```bash
+hadoop fs -mkdir /test
+```
+
+2. Upload a file
+```bash
+hadoop fs -put example1.txt /test
+```
+
+3. List files in a directory
+```bash
+hadoop fs -ls /test
+```
+
+4. MapReduce commands
+Firstly, we should create a /input directory and upload a data file to it, then we should execute the command below. 
+```bash
+hadoop jar WordCount.jar /input /output
+```
+Then we can check the outputs in HDFS /output directory
+
+### Potential Problems and Solutions
+1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted
+Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
+```bash
+cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
+```

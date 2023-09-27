@@ -92,7 +92,8 @@ RUN apt-get update && add-apt-repository ppa:deadsnakes/ppa \
          libnss3 \
          lsb-release \
          xdg-utils \
-         wget
+         wget \
+         vim
 
 # RUN pip install --default-timeout=100 --upgrade pip
 # RUN pip install pikepdf Cython numpy wheel setuptools --force-reinstall
