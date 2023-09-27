@@ -32,23 +32,23 @@ cd /opt/apps
 spark-submit --master spark://spark-master:7077 spark_script.py
 ```
 
-### About hadoop
-1. Create a directory
+## About hadoop
+### 1. Create a directory
 ```bash
 hadoop fs -mkdir /input
 ```
 
-2. Upload a file
+### 2. Upload a file
 ```bash
 hadoop fs -put /data/benda.txt /input
 ```
 
-3. List files in a directory
+### 3. List files in a directory
 ```bash
 hadoop fs -ls /input
 ```
 
-4. MapReduce example program \
+### 4. MapReduce example program
 We should run MapReduce programs on Namenode container. Let's take WordCount program for example. Firstly, we should create a /input directory and upload a data file to it, then we should check if /output directory exists. If /output directory exists, we should delete it in advance. Finally, we run WordCount.jar file to execute the MapReduce program. The commands are shown below. 
 ```bash
 # please run these commands on namenode container
