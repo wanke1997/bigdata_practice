@@ -8,8 +8,8 @@ services:
     container_name: namenode
     volumes:
       - hadoop_namenode:/hadoop/dfs/name
-      - ./data:/data
-      - ./code:/code
+      - ../../data:/data
+      - ../../src/hadoop:/code
       - ./requirements.txt:/hadoop-data/requirements.txt
     environment:
       - CLUSTER_NAME=test

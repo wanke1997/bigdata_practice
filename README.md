@@ -28,7 +28,7 @@ docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkS
 You can launch an example spark job on the client container by following the commands below. 
 ```bash
 # Please run this command on client container
-cd /opt/apps
+cd /apps
 spark-submit --master spark://spark-master:7077 spark_script.py
 ```
 

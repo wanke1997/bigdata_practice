@@ -7,8 +7,8 @@ services:
       - "9000:8181"
       - "7077:7077"
     volumes:
-      - ../../apps:/opt/apps
-      - ../../data:/opt/data
+      - ../../src/spark:/apps
+      - ../../data:/data
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_WORKLOAD=master
@@ -19,8 +19,8 @@ services:
       - "9001:8181"
       - "7000:7000"
     volumes:
-      - ../../apps:/opt/apps
-      - ../../data:/opt/data
+      - ../../src/spark:/apps
+      - ../../data:/data
     depends_on:
       - spark-master
     environment:
@@ -38,8 +38,8 @@ services:
       - "9002:8181"
       - "7001:7000"
     volumes:
-      - ../../apps:/opt/apps
-      - ../../data:/opt/data
+      - ../../src/spark:/apps
+      - ../../data:/data
     depends_on:
       - spark-master
     environment:

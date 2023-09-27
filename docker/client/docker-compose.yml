@@ -5,8 +5,8 @@ services:
     container_name: client-container
     build: .
     volumes:
-      - ../../apps:/opt/apps
-      - ../../data:/opt/data
+      - ../../src/client:/apps
+      - ../../data:/data
     command: tail -F anything
 networks:
   default:
