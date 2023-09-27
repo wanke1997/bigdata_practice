@@ -1,7 +1,7 @@
 import mysql.connector as mysql
 
 HOST = "mysql"
-DATABASE = "test"
+DATABASE = "bigdata_project"
 USER = "root"
 PASSWORD = "root"
 
