@@ -8,7 +8,7 @@ FROM openjdk:11.0.11-jre-slim-buster as builder
 ENV PATH="/opt/java/jdk-15.0.2/bin:$PATH"
 
 RUN apt-get update
-RUN apt-get install -y curl vim iputils-ping wget software-properties-common ssh net-tools ca-certificates python3 python3-numpy python3-matplotlib python3-scipy python3-pandas  
+RUN apt-get install -y curl vim iputils-ping wget software-properties-common ssh net-tools ca-certificates python3 python3-numpy python3-matplotlib python3-scipy python3-pandas mariadb-server 
 RUN apt update && apt install python3-pip -y
 
 WORKDIR /opt/java
