@@ -78,7 +78,7 @@ docker-compose up -d
 ```
 2. Start Hadoop
 ```bash
-cd <dir_to_project>/docker/zookeeper_kafka
+cd <dir_to_project>/docker/hadoop
 docker build -t hadoop-base:3.3.1 -f Dockerfile .
 docker-compose up -d
 ```
