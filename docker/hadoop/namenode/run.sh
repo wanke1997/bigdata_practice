@@ -25,5 +25,5 @@
 
 # kick-off namenode server
 # echo $HADOOP_HOME
-cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
+# cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
 cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode
