@@ -49,7 +49,7 @@ hadoop fs -ls /test
 4. MapReduce commands
 Firstly, we should create a /input directory and upload a data file to it, then we should execute the command below. 
 ```bash
-hadoop jar WordCount.jar wordcount /input /output
+hadoop jar WordCount.jar WordCount /input /output
 ```
 Then we can check the outputs in HDFS /output directory. If /output directory exists, we should delete it in advance. 
 
