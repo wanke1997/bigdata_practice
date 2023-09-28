@@ -5,7 +5,7 @@ import json
 from json import loads
 
 bootstrap_servers = ["kafka1:9091","kafka2:9092","kafka3:9093"]
-topic_name = 'test'
+topic_name = 'bigdata'
 file_name = '/data/GDS_logs_small.txt'
 
 # create a topic
@@ -14,12 +14,12 @@ try:
         bootstrap_servers=bootstrap_servers, 
     )
     topic_list = []
-    topic_list.append(NewTopic(name=topic_name, num_partitions=4, replication_factor=4))
+    topic_list.append(NewTopic(name=topic_name, num_partitions=3, replication_factor=3))
     admin_client.create_topics(new_topics=topic_list)
 except kafka.errors.TopicAlreadyExistsError:
-    print("ERROR: The topic that you entered already exists.")
+    print("The topic that you entered already exists.")
 else:
-    print("SUCCESS: The topic has been created.")
+    print("The topic has been created.")
 
 # create a producer
 producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
