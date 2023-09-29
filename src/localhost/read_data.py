@@ -24,10 +24,20 @@ def write_smaller_data(input_file_name:str, output_file_name:str):
     input_file.close()
     output_file.close()
     
-dir = os.getcwd()
-print(dir)
-file_name = dir+"/data/GDS_logs.txt"
-smaller_file_name = dir+"/data/GDS_logs_small.txt"
+# dir = os.getcwd()
+# print(dir)
+# file_name = dir+"/data/GDS_logs.txt"
+# smaller_file_name = dir+"/data/GDS_logs_small.txt"
 # check_data_format(file_name)
 # print("we have received",1,"messages")
-write_smaller_data(file_name, smaller_file_name)
+# write_smaller_data(file_name, smaller_file_name)
+
+# records = [
+#   {'name': 'foo', 'weight': 1},
+#   {'name': 'bar', 'weight': 2},
+# ]
+
+# data = json.dumps(records).encode('utf-8')
+# print(data)
+# data = data.decode('utf-8')
+# print(data)

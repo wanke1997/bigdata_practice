@@ -66,9 +66,9 @@ After this, we can check the outputs in HDFS /output directory.
 | HDFS | namenode | 9870 | http://localhost:9870 |
 | MapReduce Tasks | resourcemanager | 8089 | http://localhost:8089 |
 | DataNode | datanode1/2/3 | 9864,9864,9864 | N/A |
-| HBase | master | 16010 | http://localhost:16010 |
+| HBase | hbase-master | 16010 | http://localhost:16010 |
 | MySQL | mysql | 8989:3306 | N/A |
-| Spark | master | 9000:8181 | http://localhost:9000 |
+| Spark | spark-master | 9000:8181 | http://localhost:9000 |
 
 ## Start containers
 1. Start Zookeeper and Kafka
