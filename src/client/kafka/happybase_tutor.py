@@ -10,14 +10,12 @@ connection = happybase.Connection(
     autoconnect=False,
 )
 connection.open()
-print("connected to hbase")
 
 # list all tables
-print(connection.tables())
+print("all tables:", connection.tables())
 
 # create a table
 if 'my_table'.encode('utf-8') not in connection.tables():
-    print("I AM HERE")
     connection.create_table(
         'my_table',
         {
