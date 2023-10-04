@@ -2,10 +2,10 @@ package localhost;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.*;
 
 // Total data: 4937970
+// Total keys:1094059
 
 public class CountTotalData {
       public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class CountTotalData {
                   }
                   System.out.println("Total data: "+cnt);
                   scanner.close();
-                  System.out.println("total keys:"+set.size());
+                  System.out.println("Total keys:"+set.size());
             } catch(FileNotFoundException e) {
                   e.printStackTrace();
             }
