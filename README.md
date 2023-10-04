@@ -127,3 +127,5 @@ cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTE
 
 ## Notes:
 所有的开发都在client里面完成，使用python脚本和插件，remote访问所有的服务（hadoop,mysql,spark,kafka,etc）
+
+TODO: 原始数据需要清洗，有大量重复的key
