@@ -3,11 +3,6 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark import SparkConf
 import os
-import happybase
-
-# from pyspark import SparkContext
-# from pyspark.streaming import StreamingContext
-# from pyspark.streaming import KafkaUtils
 
 os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 pyspark-shell'
 
@@ -80,6 +75,4 @@ query = df \
         .foreach(HBaseWriter()) \
         .start() \
         .awaitTermination(timeout=600)
-# TODO: configure HBase write stream
-
 print('################################################################')

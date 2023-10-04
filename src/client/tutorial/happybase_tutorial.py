@@ -1,7 +1,5 @@
 # ref: https://blog.csdn.net/weixin_35757704/article/details/123018548
-
 import happybase
-
 
 # connect to HBase
 connection = happybase.Connection(

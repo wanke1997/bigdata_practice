@@ -1,11 +1,9 @@
 import happybase
 
-
 topic = "bigdata_tiny"
 hbase_host = 'hbase-master'
 hbase_port = 9090
 hbase_table = 'bigdata_table'
-
 
 # connect to HBase
 connection = happybase.Connection(

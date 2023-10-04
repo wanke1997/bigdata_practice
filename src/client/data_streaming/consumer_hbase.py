@@ -40,7 +40,6 @@ sample_schema = (
     .add('fail', StringType())
 ) 
 
-
 print('################################################################')
 # load streaming data from Kafka topic
 df = spark \
@@ -107,5 +106,5 @@ query = df \
         .writeStream \
         .foreach(HBaseWriter()) \
         .start() \
-        .awaitTermination()
+        .awaitTermination(2400)
 print('################################################################')
