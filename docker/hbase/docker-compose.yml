@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   hbase-master:
-    image: bde2020/hbase-master:1.0.0-hbase1.2.6
+    build: .
     container_name: hbase-master
     hostname: hbase-master
     env_file:
