@@ -72,7 +72,11 @@ class HBaseWriter:
             b'status:fail':row['fail'].encode('utf-8')
         })
     def close(self, error):
-        pass
+        try:
+            self.connection.close()
+        except Exception as e:
+            print("exception: unable to close connection with HBase")
+            print(e)
 
 print('################################################################')
 # load streaming data from Kafka topic
