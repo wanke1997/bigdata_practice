@@ -5,7 +5,6 @@ import os
 from happybase import *
 
 os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 pyspark-shell'
-
 appName = "Kafka-Spark-HBase Writer"
 spark_master = "spark://spark-master:7077"
 kafka_servers = "kafka1:9091,kafka2:9092,kafka3:9093"
@@ -14,12 +13,14 @@ host = 'hbase-master'
 port = 9090
 table_name = 'bigdata_table'
 
+# configure spark jobs
 spark = SparkSession.builder \
     .master(spark_master) \
     .appName(appName) \
     .config("spark.executor.memory", "4g") \
     .getOrCreate()
 
+# kafka message schema
 sample_schema = (
     StructType()
     .add('key', StringType())
@@ -40,16 +41,7 @@ sample_schema = (
     .add('fail', StringType())
 ) 
 
-print('################################################################')
-# load streaming data from Kafka topic
-df = spark \
-     .readStream \
-     .format("kafka") \
-     .option("kafka.bootstrap.servers", kafka_servers) \
-     .option("subscribe", topic) \
-     .option("startingOffsets", "earliest") \
-     .load()
-
+# define hbase writer
 class HBaseWriter:
     def open(self, partition_id, epoch_id):
         self.connection = Connection(
@@ -81,6 +73,17 @@ class HBaseWriter:
     def close(self, error):
         pass
 
+print('################################################################')
+# load streaming data from Kafka topic
+df = spark \
+     .readStream \
+     .format("kafka") \
+     .option("kafka.bootstrap.servers", kafka_servers) \
+     .option("subscribe", topic) \
+     .option("startingOffsets", "earliest") \
+     .load()
+
+# connect to hbase
 connection = Connection(
     host=host, 
     port=port, 
@@ -88,6 +91,7 @@ connection = Connection(
 )
 connection.open()
 
+# create hbase table
 if table_name.encode('utf-8') not in connection.tables():
     connection.create_table(
         table_name, {
@@ -99,6 +103,7 @@ if table_name.encode('utf-8') not in connection.tables():
         }
     )
 
+# write kafka stream to hbase
 query = df \
         .selectExpr("CAST(value AS STRING)") \
         .select(from_json(col("value"), sample_schema).alias("data")) \

@@ -26,9 +26,9 @@ producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
 item_names = ['key','rowkey','time','MAC','PCM','departAirport','airline','agent','country','request','response','error','errorCode','errorType','success','fail']
 file = open(file_name,'r')
 
+# read data from file to kafka stream
 line = file.readline()
 count = 0
-
 while line is not None and line != '':
     components = line.strip().split("|")
     components = [str(count)]+components
@@ -40,7 +40,6 @@ while line is not None and line != '':
         metadata = ack.get()
         print(count/10000, metadata.topic, metadata.partition)
     line = file.readline()
-    
 
 print("we sent",count,"messages")
 file.close()
