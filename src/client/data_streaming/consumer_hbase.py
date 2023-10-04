@@ -44,13 +44,14 @@ sample_schema = (
 # define hbase writer
 class HBaseWriter:
     def open(self, partition_id, epoch_id):
+        global table_name
         self.connection = Connection(
             host=host, 
             port=port, 
             autoconnect=False,
         )
         self.connection.open()
-        self.table = self.connection.table('bigdata_table')
+        self.table = self.connection.table(table_name)
         return True
     def process(self, row):
         self.table.put(row['key'].encode('utf-8'), {
