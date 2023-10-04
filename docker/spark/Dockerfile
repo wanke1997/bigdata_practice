@@ -53,6 +53,9 @@ ln -sf /dev/stdout $SPARK_WORKER_LOG
 
 RUN update-alternatives --install "/usr/bin/python" "python" "$(which python3)" 1
 
+COPY ./requirements.txt /
+RUN pip3 install -r /requirements.txt
+
 COPY start-spark.sh /
 
 CMD ["/bin/bash", "/start-spark.sh"]

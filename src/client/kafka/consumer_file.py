@@ -21,6 +21,7 @@ spark = SparkSession.builder \
 
 sample_schema = (
     StructType()
+    .add('key', StringType())
     .add('rowkey', StringType())
     .add('time', StringType())
     .add('MAC', StringType())

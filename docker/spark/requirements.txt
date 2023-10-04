@@ -1,0 +1,11 @@
+lxml
+python-decouple
+requests
+pandas
+kafka-python
+kafka-python3
+mysql-connector-python
+hdfs
+happybase
+hbase-python
+pyspark

@@ -1,25 +1,28 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from pyspark import SparkConf
 import os
-import happybase
+from happybase import *
 
 os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.4.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1 pyspark-shell'
 
 appName = "Kafka-Spark-HBase Writer"
-master = "spark://spark-master:7077"
+spark_master = "spark://spark-master:7077"
 kafka_servers = "kafka1:9091,kafka2:9092,kafka3:9093"
-topic = "bigdata_small"
+topic = "bigdata"
+host = 'hbase-master'
+port = 9090
+table_name = 'bigdata_table'
 
 spark = SparkSession.builder \
-    .master(master) \
+    .master(spark_master) \
     .appName(appName) \
     .config("spark.executor.memory", "4g") \
     .getOrCreate()
 
 sample_schema = (
     StructType()
+    .add('key', StringType())
     .add('rowkey', StringType())
     .add('time', StringType())
     .add('MAC', StringType())
@@ -35,18 +38,11 @@ sample_schema = (
     .add('errorType', StringType())
     .add('success', StringType())
     .add('fail', StringType())
-)
+) 
 
-class HBaseWriter:
-    def open(self, partition_id, epoch_id):
-        return True
-    def process(self, row):
-        pass
-    def close(self, error):
-        pass
 
 print('################################################################')
-
+# load streaming data from Kafka topic
 df = spark \
      .readStream \
      .format("kafka") \
@@ -55,7 +51,55 @@ df = spark \
      .option("startingOffsets", "earliest") \
      .load()
 
-print('started to query')
+class HBaseWriter:
+    def open(self, partition_id, epoch_id):
+        self.connection = Connection(
+            host=host, 
+            port=port, 
+            autoconnect=False,
+        )
+        self.connection.open()
+        self.table = self.connection.table('bigdata_table')
+        return True
+    def process(self, row):
+        self.table.put(row['key'].encode('utf-8'), {
+            b'basic:rowkey':row['rowkey'].encode('utf-8'),
+            b'basic:time':row['time'].encode('utf-8'),
+            b'property:MAC':row['MAC'].encode('utf-8'),
+            b'property:PCM':row['PCM'].encode('utf-8'),
+            b'property:departAirport':row['departAirport'].encode('utf-8'),
+            b'property:airline':row['airline'].encode('utf-8'),
+            b'property:agent':row['agent'].encode('utf-8'),
+            b'property:country':row['country'].encode('utf-8'),
+            b'connection:request':row['request'].encode('utf-8'),
+            b'connection:response':row['response'].encode('utf-8'),
+            b'error:error':row['error'].encode('utf-8'),
+            b'error:errorCode':row['errorCode'].encode('utf-8'),
+            b'error:errorType':row['errorType'].encode('utf-8'),
+            b'status:success':row['success'].encode('utf-8'),
+            b'status:fail':row['fail'].encode('utf-8')
+        })
+    def close(self, error):
+        pass
+
+connection = Connection(
+    host=host, 
+    port=port, 
+    autoconnect=False,
+)
+connection.open()
+
+if table_name.encode('utf-8') not in connection.tables():
+    connection.create_table(
+        table_name, {
+            'basic': dict(),
+            'property': dict(),
+            'connection': dict(),
+            'error': dict(),
+            'status': dict(),
+        }
+    )
+
 query = df \
         .selectExpr("CAST(value AS STRING)") \
         .select(from_json(col("value"), sample_schema).alias("data")) \
@@ -63,7 +107,5 @@ query = df \
         .writeStream \
         .foreach(HBaseWriter()) \
         .start() \
-        .awaitTermination(timeout=600)
-# TODO: configure HBase write stream
-
+        .awaitTermination()
 print('################################################################')

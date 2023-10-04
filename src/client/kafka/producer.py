@@ -23,7 +23,7 @@ else:
 
 # create a producer
 producer = KafkaProducer(bootstrap_servers=bootstrap_servers)
-item_names = ['rowkey','time','MAC','PCM','departAirport','airline','agent','country','request','response','error','errorCode','errorType','success','fail']
+item_names = ['key','rowkey','time','MAC','PCM','departAirport','airline','agent','country','request','response','error','errorCode','errorType','success','fail']
 file = open(file_name,'r')
 
 line = file.readline()
@@ -31,6 +31,7 @@ count = 0
 
 while line is not None and line != '':
     components = line.strip().split("|")
+    components = [str(count)]+components
     jsonObject = json.dumps(dict(map(lambda i,j:(i,j), item_names, components))).encode('utf-8')
     ack = producer.send(topic_name,jsonObject)
     count += 1
