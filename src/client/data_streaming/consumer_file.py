@@ -15,7 +15,7 @@ file_name = "/data/consumer_file_output.txt"
 spark = SparkSession.builder \
     .master(master) \
     .appName(appName) \
-    .config("spark.executor.memory", "4g") \
+    .config("spark.executor.memory", "7g") \
     .getOrCreate()
 
 sample_schema = (

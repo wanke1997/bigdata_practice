@@ -17,7 +17,7 @@ table_name = 'bigdata_table'
 spark = SparkSession.builder \
     .master(spark_master) \
     .appName(appName) \
-    .config("spark.executor.memory", "4g") \
+    .config("spark.executor.memory", "7g") \
     .getOrCreate()
 
 # kafka message schema
