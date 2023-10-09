@@ -26,9 +26,9 @@ services:
     environment:
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=4G
-      - SPARK_DRIVER_MEMORY=4G
-      - SPARK_EXECUTOR_MEMORY=4G
+      - SPARK_WORKER_MEMORY=7G
+      - SPARK_DRIVER_MEMORY=7G
+      - SPARK_EXECUTOR_MEMORY=7G
       - SPARK_WORKLOAD=worker
       - SPARK_LOCAL_IP=spark-worker-a
   spark-worker-b:
@@ -45,9 +45,9 @@ services:
     environment:
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_CORES=2
-      - SPARK_WORKER_MEMORY=4G
-      - SPARK_DRIVER_MEMORY=4G
-      - SPARK_EXECUTOR_MEMORY=4G
+      - SPARK_WORKER_MEMORY=7G
+      - SPARK_DRIVER_MEMORY=7G
+      - SPARK_EXECUTOR_MEMORY=7G
       - SPARK_WORKLOAD=worker
       - SPARK_LOCAL_IP=spark-worker-b
   demo-database:

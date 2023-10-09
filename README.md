@@ -67,8 +67,10 @@ After this, we can check the outputs in HDFS /output directory.
 | MapReduce Tasks | resourcemanager | 8089 | http://localhost:8089 |
 | DataNode | datanode1/2/3 | 9864,9864,9864 | N/A |
 | HBase | hbase-master | 16010 | http://localhost:16010 |
+| HBase Thrift | hbase-master | 9090 | N/A |
 | MySQL | mysql | 8989:3306 | N/A |
 | Spark | spark-master | 9000:8181 | http://localhost:9000 |
+| Jupyter Notebook | jupyter-container | 8888 | http://localhost:8888 |
 
 ## Start containers
 1. Start Zookeeper and Kafka
@@ -129,3 +131,22 @@ cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTE
 所有的开发都在client里面完成，使用python脚本和插件，remote访问所有的服务（hadoop,mysql,spark,kafka,etc）
 
 TODO: 原始数据需要清洗，有大量重复的key
+
+##  Configure
+
+The config files are located in `./config` folder, edit the `jupyter-config.json` for customization.
+
+Remember that the local `./config` dir is mounted as `/home/jovyan/.jupyter/config` within the container.
+
+### Passphrase
+
+The default passphrase to access the notebook is `notebook`.
+
+You will need to edit the `./config/jupyter-config.json` file and change the value of `NotebookApp.password` key. The
+passphrase can be generated using the following command:
+
+```yaml
+./passphrase
+```
+
+Use the output of the command to set the `NotebookApp.password` key.
