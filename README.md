@@ -1,6 +1,6 @@
-# bigdata_practice
+# Bigdata Practice
 
-## Launch Docker containers
+## Launch Docker Containers
 1. Start Zookeeper and Kafka
 ```bash
 cd <dir_to_project>/docker/zookeeper_kafka
@@ -33,7 +33,7 @@ cd <dir_to_project>/docker/client
 docker-compose up -d
 ```
 
-## Example programs
+## Example Programs
 
 ### About Spark
 
@@ -44,7 +44,7 @@ cd /apps/tutorial
 spark-submit --master spark://spark-master:7077 spark_tutorial.py
 ```
 
-### About hadoop
+### About Hadoop
 #### 1. Create a directory
 ```bash
 hadoop fs -mkdir /input
@@ -60,15 +60,15 @@ hadoop fs -put /data/benda.txt /input
 hadoop fs -ls /input
 ```
 
-#### 4. MapReduce example program
-We should run MapReduce programs on Namenode container. Let's take WordCount program for example. Firstly, we should create a /input directory and upload a data file to it, then we should check if /output directory exists. If /output directory exists, we should delete it in advance. Finally, we run WordCount.jar file to execute the MapReduce program. The commands are shown below. 
+#### 4. MapReduce Example Program
+We run MapReduce programs on `Namenode` container. Let's take `WordCount` program for example. Firstly, we create a `/input` directory and upload a data file to it, then we check if `/output` directory exists. If `/output` directory exists, we should delete it in advance. Finally, we run `WordCount.jar` file to execute the MapReduce program. The commands are shown below. 
 ```bash
 # please run these commands on namenode container
 hadoop fs -mkdir /input
 hadoop fs -put /data/benda.txt /input
 hadoop jar /code/WordCount.jar WordCount /input /output
 ```
-After this, we can check the outputs in HDFS /output directory. 
+After this, we can check the outputs in HDFS `/output` directory. 
 
 ## Containers Information:
 | Name | Container | Port | Webserver Link |
@@ -94,13 +94,13 @@ Default variable settings are shown below
 | MYSQL_ROOT_PASSWORD | root |
 | MYSQL_USER | dev |
 | MYSQL_PASSWORD | dev |
-Follow the command below to login mySQL
+Follow the command below to login mySQL.
 ```bash
 # command to start mysql from mysql container, the password can be found from the table above
 mysql -u root -p
 ```
 
-## data processing
+## Data Processing
 Data processing files mainly responsible to retrieve data from HBase database, then do aggregation calculation with Spark. `questions.py` Python script in `/src/client/data_processing` directory answers questions of this project (see page 3 of description). Please run the Python scripts by following the commands below. Note that the  `/src/client/data_processing` directory is mapped to `/apps/data_processing` in client container. 
 ```bash
 # Please run tutorial file in client container
@@ -108,14 +108,14 @@ cd /apps/data_processing
 spark-submit --master spark://spark-master:7077 questions.py
 ```
 
-## Notes and trouble shooting
+## Notes and Trouble Shooting
 1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
 Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
 ```bash
 cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
 ```
 
-2. get all container's ip address: 
+2. Get all container's ip address: 
 ```bash
 docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';
 ```
