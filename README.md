@@ -70,7 +70,7 @@ hadoop jar /code/WordCount.jar WordCount /input /output
 ```
 After this, we can check the outputs in HDFS `/output` directory. 
 
-## Containers Information:
+## Containers Information
 | Name | Container | Port | Webserver Link |
 |------|------|-----|-----|
 | Zookeeper | zookeeper | 2181 | N/A |
@@ -94,6 +94,7 @@ Default variable settings are shown below
 | MYSQL_ROOT_PASSWORD | root |
 | MYSQL_USER | dev |
 | MYSQL_PASSWORD | dev |
+
 Follow the command below to login mySQL.
 ```bash
 # command to start mysql from mysql container, the password can be found from the table above
