@@ -110,13 +110,14 @@ spark-submit --master spark://spark-master:7077 questions.py
 ```
 
 ## Notes and Trouble Shooting
-1. When starting Hadoop, namenode doesn't work, saying that it has not been firmatted \
-Solution: uncommment the last second command in namenode/run.sh file to format the file system. That is:
-```bash
-cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME
-```
+1. If you start Hadoop for the first time, namenode may exit with code 1 saying that it has not been formatted \
+Solution: `uncommment` the last 2nd command in `docker/hadoop/namenode/run.sh` file to format the file system. That command is: `cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME`. After this, delete and rebuild the base image. Then restart the docker containers. 
 
-2. Get all container's ip address: 
+2. If you start the containers and find that resourcemanager exits, 
+
+Solution: You should `commment` the last 2nd command in `docker/hadoop/namenode/run.sh` file. That command is: `cd $HADOOP_HOME/bin && ./hdfs --config $HADOOP_CONF_DIR namenode -format $CLUSTER_NAME`. After this, delete and rebuild the base image. Then restart the docker containers. 
+
+3. Get all container's ip address: 
 ```bash
 docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';
 ```
