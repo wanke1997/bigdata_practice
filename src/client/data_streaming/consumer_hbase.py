@@ -116,5 +116,5 @@ query = df \
         .writeStream \
         .foreach(HBaseWriter()) \
         .start() \
-        .awaitTermination(timeout=120)
+        .awaitTermination(timeout=300)
 print('################################################################')
