@@ -39,8 +39,6 @@ def retrieve_data(sparkContext):
             int(cf[b"status:fail"].decode("utf-8")),
         )
         dataset.append(data)
-        if cnt%10000==0:
-            file.write(str(data)+"\n")
     file.write("length of dataset:"+str(len(dataset))+"\n")
     connection.close()
 
@@ -130,7 +128,7 @@ if __name__ == "__main__":
     file.write("################################################################\n")
 
     # tutorial
-    tutorial(sparkContext)
+    # tutorial(sparkContext)
 
     # get rdd
     rdd = retrieve_data(sparkContext)
