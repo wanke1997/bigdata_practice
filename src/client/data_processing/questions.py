@@ -90,7 +90,8 @@ def Q2(rdd, time_range:str, start_time:str, request:str):
 
 def Q3(rdd):
     # 3.1. find five airlines who made most requests
-    rdd2 = rdd.map(lambda x:(x[1],1))
+    rdd = rdd.map(lambda x:(x[0][:8],x[1],x[2],x[3],x[4],x[5]))
+    rdd2 = rdd.map(lambda x:((x[0],x[1]),1))
     res = rdd2.reduceByKey(lambda a,b:a+b).sortBy(lambda x:-x[1]).collect()
     file.write("Q3.1 answer:\n")
     for line in res:
@@ -98,7 +99,7 @@ def Q3(rdd):
     file.write("\n")
 
     # 3.2. find five airlines who made the most SUCCESSFUL requests
-    rdd2 = rdd.filter(lambda x:x[4]==1).map(lambda x:(x[1],1))
+    rdd2 = rdd.filter(lambda x:x[4]==1).map(lambda x:((x[0],x[1]),1))
     res = rdd2.reduceByKey(lambda a,b:a+b).sortBy(lambda x:-x[1]).collect()
     file.write("Q3.2 answer:\n")
     for line in res:
@@ -106,7 +107,7 @@ def Q3(rdd):
     file.write("\n")
 
     # 3.3. find five airlines who made the most FAILED requests
-    rdd2 = rdd.filter(lambda x:x[5]==1).map(lambda x:(x[1],1))
+    rdd2 = rdd.filter(lambda x:x[5]==1).map(lambda x:((x[0],x[1]),1))
     res = rdd2.reduceByKey(lambda a,b:a+b).sortBy(lambda x:-x[1]).collect()
     file.write("Q3.3 answer:\n")
     for line in res:
