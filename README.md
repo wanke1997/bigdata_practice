@@ -9,7 +9,7 @@ docker-compose up -d
 2. Start Hadoop
 ```bash
 cd <dir_to_project>/docker/hadoop
-docker build -t hadoop-base:3.3.1 -f Dockerfile .
+docker build -t hadoop-base:3.3.5 -f Dockerfile .
 docker-compose up -d
 ```
 3. Start HBase. Note that the prerequisite of starting HBase is that Zookeeper and Hadoop are running
